@@ -28,9 +28,10 @@ int main(void)
         BeginDrawing();
 
             ClearBackground(BEIGE);
-
+            DrawRectangle (190, 200, 350, 100,  ORANGE); 
             DrawText("xiaolulu", 190, 200, 89, PINK);
-
+            DrawCircle(400, 300, 8, BLACK);
+            
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
