@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include <stdbool.h>
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -15,6 +16,8 @@ int main(void)
     Texture2D texture = LoadTexture("resources/dice.png");
     Shader shader = LoadShader(0, "grayshader.glsl");
     
+    
+    bool useShader = false;
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -25,17 +28,31 @@ int main(void)
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
         //----------------------------------------------------------------------------------
-
+        if (IsKeyPressed(KEY_UP)) {
+            useShader = true;
+        }
+        
+        if (IsKeyPressed(KEY_DOWN)) {
+            useShader = false;
+        }
+        
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
             ClearBackground(BEIGE);
             
-            BeginShaderMode(shader);    // 开始应用 Shader 模式
-            DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
-    
-            EndShaderMode();            // 结束 Shader 模式
+           // 开始应用 Shader 模式
+           if (useShader) {
+               BeginShaderMode(shader);
+           }
+           
+           DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);    
+          
+           // 结束 Shader 模式
+            if (useShader) {
+                EndShaderMode();  
+            }
             
         EndDrawing();
         //----------------------------------------------------------------------------------

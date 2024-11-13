@@ -15,11 +15,9 @@ out vec4 finalColor;
 
 void main()
 {
-
     vec4 texelColor = texture(texture0, fragTexCoord);
     // 反转颜色
     texelColor.rgb = 1.0 - texelColor.rgb;
     
     finalColor = texelColor * colDiffuse;
-    
 }
